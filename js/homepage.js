@@ -35,5 +35,9 @@ async function main() {
     log.innerHTML += `<p>Eth: ${(await WETH_CONTRACT.balanceOf(POOL_ADDRESS) / supply * lp_token).toFixed(2)}   Pickle: ${(await PICKLE_CONTRACT.balanceOf(POOL_ADDRESS) / supply * lp_token).toFixed(2)}</p>`;
     let price = await lookUpPrices(['pickle-finance']);
     log.innerHTML += `<p>Pickle Price: ${(price[0].current_price).toFixed(2)}</p>`;
+    let pickle_supply = await PICKLE_CONTRACT.totalSupply();
+    log.innerHTML += `<p>Pickle Supply: ${(pickle_supply / 1e18).toFixed(2)}</p>
+    <p>Marketcap: $${(pickle_supply / 1e18 * price[0].current_price / 1e6).toFixed(2)}m</p>`;
+    
 }
 
