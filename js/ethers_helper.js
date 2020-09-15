@@ -26,32 +26,32 @@ async function init_ethers() {
         App.provider = new ethers.providers.JsonRpcProvider(atob(ETHEREUM_NODE_URL));
         isMetaMaskInstalled = false;
         _print("You don't have MetaMask installed! Falling back to backup node...\n (will likely to fail. Please install MetaMask extension).\n")
-        sleep(10);
+        // sleep(10);
     }
 
-    App.YOUR_ADDRESS = getUrlParameter("addr");
+    // App.YOUR_ADDRESS = getUrlParameter("addr");
 
-    // Cloud not load URL parameter
-    if (!App.YOUR_ADDRESS) {
-        if (!isMetaMaskInstalled) {
+    // // Cloud not load URL parameter
+    // if (!App.YOUR_ADDRESS) {
+    //     if (!isMetaMaskInstalled) {
 
-            if (localStorage.hasOwnProperty('addr')) {
-                App.YOUR_ADDRESS = localStorage.getItem('addr');
-            } else {
-                App.YOUR_ADDRESS = window.prompt("Enter your eth address.");
-            }
+    //         if (localStorage.hasOwnProperty('addr')) {
+    //             App.YOUR_ADDRESS = localStorage.getItem('addr');
+    //         } else {
+    //             App.YOUR_ADDRESS = window.prompt("Enter your eth address.");
+    //         }
 
-        } else {
-            let accounts = await App.provider.listAccounts();
-            App.YOUR_ADDRESS = accounts[0];
-        }
-    }
+    //     } else {
+    //         let accounts = await App.provider.listAccounts();
+    //         App.YOUR_ADDRESS = accounts[0];
+    //     }
+    // }
 
-    if (!App.YOUR_ADDRESS || !ethers.utils.isAddress(App.YOUR_ADDRESS)) {
-        throw "Could not initialize your address. Make sure your address is checksum valid.";
-    }
+    // if (!App.YOUR_ADDRESS || !ethers.utils.isAddress(App.YOUR_ADDRESS)) {
+    //     throw "Could not initialize your address. Make sure your address is checksum valid.";
+    // }
 
-    localStorage.setItem('addr', App.YOUR_ADDRESS);
+    // localStorage.setItem('addr', App.YOUR_ADDRESS);
     return App;
 }
 
