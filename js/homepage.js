@@ -32,7 +32,12 @@ async function main() {
     const PICKLE_CONTRACT = new ethers.Contract(PICKLE_ADDRESS, ERC20_ABI, App.provider);
     const POOL_CONTRACT = new ethers.Contract(POOL_ADDRESS, ERC20_ABI, App.provider);
     let supply = await POOL_CONTRACT.totalSupply();
-    log.innerHTML += `<p>Eth: ${(await WETH_CONTRACT.balanceOf(POOL_ADDRESS) / supply * lp_token).toFixed(2)}   Pickle: ${(await PICKLE_CONTRACT.balanceOf(POOL_ADDRESS) / supply * lp_token).toFixed(2)}</p>`;
+    let cur_eth = await WETH_CONTRACT.balanceOf(POOL_ADDRESS) / supply * lp_token;
+    let cur_pickle = await PICKLE_CONTRACT.balanceOf(POOL_ADDRESS) / supply * lp_token;
+    log.innerHTML += `<p>Eth: ${(cur_eth).toFixed(2)}   Pickle: ${(cur_pickle).toFixed(2)}</p>`;
+
+    log.innerHTML += `<p>Rewards: ${((cur_pickle * 2 + pickle) / cur_pickle * cur_eth / 68).toFixed(2)}</p>`;
+    log.innerHTML += `-----------Pickle Info----------------`;
     let price = await lookUpPrices(['pickle-finance']);
     log.innerHTML += `<p>Pickle Price: ${(price[0].current_price).toFixed(2)}</p>`;
     let pickle_supply = await PICKLE_CONTRACT.totalSupply();
