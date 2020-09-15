@@ -25,9 +25,9 @@ async function main() {
     log.innerHTML += `<p>HYL: ${(pickle * 30 / 68).toFixed(2)}</p>`;
     log.innerHTML += `-----------Pool Info----------------`;
     log.innerHTML += `<p>Initial: </p>
-    <p>Eth: 33.75   Pickle: 423.72</p>
+    <p>Eth: 33.75 + 11.52   Pickle: 423.72 + 85.75</p>
     <p>Now: </p>`;
-    let lp_token = 116.601;
+    let lp_token = 116.601 + 30.33;
     const WETH_CONTRACT = new ethers.Contract('0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', ERC20_ABI, App.provider);
     const PICKLE_CONTRACT = new ethers.Contract(PICKLE_ADDRESS, ERC20_ABI, App.provider);
     const POOL_CONTRACT = new ethers.Contract(POOL_ADDRESS, ERC20_ABI, App.provider);
